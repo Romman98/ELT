@@ -3,9 +3,13 @@ import json
 from datetime import date
 from airflow.decorators import task
 from airflow.models import Variable
+
 # import os
 # from dotenv import load_dotenv
 # load_dotenv(dotenv_path="./.env")
+
+# API_KEY = os.getenv("API_KEY")
+# CHANNEL_HANDLE = os.getenv("CHANNEL_HANDLE")
 
 API_KEY = Variable.get("API_KEY")
 CHANNEL_HANDLE = Variable.get("CHANNEL_HANDLE")
@@ -61,7 +65,7 @@ def get_video_ids(playlistId):
         raise e
 
 @task
-def extrat_video_data(video_ids):
+def extract_video_data(video_ids):
     extracted_data = []
     
     def batch_list(video_id_lst,batch_size):
@@ -109,7 +113,7 @@ def save_to_json(extracted_data):
 if __name__ == "__main__":
     playlistId = get_playlist_id()
     video_ids = get_video_ids(playlistId)
-    extracted_video_data = extrat_video_data(video_ids)
+    extracted_video_data = extract_video_data(video_ids)
     save_to_json(extracted_video_data)
 else:
     print("get_playlist_id wont be executed")
