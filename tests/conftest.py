@@ -1,8 +1,8 @@
 import os
-import pytest
-import psycopg2
+import pytest # type: ignore
+import psycopg2 # pyright: ignore
 from unittest import mock
-from airflow.models import Variable, Connection, DagBag
+from airflow.models import Variable, Connection, DagBag # pyright: ignore
 
 @pytest.fixture
 def api_key():
