@@ -1,8 +1,8 @@
-from airflow import DAG
-import pendulum
+from airflow import DAG # pyright: ignore 
+import pendulum # pyright: ignore
 from datetime import datetime, timedelta
 from api.video_stats import get_playlist_id, get_video_ids, extract_video_data, save_to_json
-from airflow.operators.trigger_dagrun import TriggerDagRunOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator # pyright: ignore
 
 local_tz = pendulum.timezone("Asia/Amman")
 # local_tz = pendulum.timezone("Europe/Malta")
@@ -48,7 +48,7 @@ with DAG(
     )
 
     # Define dependencies
-    playlist_id >> video_ids >> extract_data >> save_to_json_task >> trigger_update_db
+    playlist_id >> video_ids >> extract_data >> save_to_json_task >> trigger_update_db # pyright: ignore
 
 
 with DAG(
@@ -70,7 +70,7 @@ with DAG(
 
      
     # define dependencies
-    update_staging >> update_core >> trigger_data_quality
+    update_staging >> update_core >> trigger_data_quality # type: ignore
 
 with DAG(
     dag_id = 'data_quality',
@@ -86,4 +86,4 @@ with DAG(
 
      
     # define dependencies
-    soda_validate_staging >> soda_validate_core
+    soda_validate_staging >> soda_validate_core # pyright: ignore

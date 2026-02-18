@@ -1,8 +1,8 @@
 import requests
 import json
 from datetime import date
-from airflow.decorators import task
-from airflow.models import Variable
+from airflow.decorators import task # pyright: ignore
+from airflow.models import Variable # pyright: ignore
 
 # import os
 # from dotenv import load_dotenv

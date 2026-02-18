@@ -1,6 +1,6 @@
 import requests
-import pytest
-import psycopg2
+import pytest  # pyright: ignore
+import psycopg2 # pyright: ignore
 
 def test_yoututbe_api_response(airflow_variable):
     api_key = airflow_variable("api_key")
@@ -11,7 +11,7 @@ def test_yoututbe_api_response(airflow_variable):
     try:
         response = requests.get(url)
         assert response.status_code == 200
-    except:
+    except requests.RequestException as e:
         pytest.fail(f"Request to Youtube API failed: {e}")
 
 
